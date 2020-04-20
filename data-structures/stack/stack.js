@@ -1,25 +1,26 @@
 class Stack {
   constructor() {
-    this.memory = {};
-    this.length = 0;
+    this._memory = {};
+    this._length = 0;
   }
 
   push(value) {
-    this.length++;
-    this.memory[this.length] = value;
+    this._memory[this._length++] = value;
   }
 
   pop() {
-    if(!this.length) return undefined;
-
-    const popped = this.memory[this.length];
-    delete this.memory[this.length];
-    this.length--;
+    const popped = this._memory[this._length - 1];
+    delete this._memory[this._length - 1];
+    if (this._length) this._length--;
     return popped;
   }
 
+  size() {
+    return this._length;
+  }
+
   peek() {
-    return this.memory[this.length];
+    return this._memory[this._length - 1];
   }
 }
 

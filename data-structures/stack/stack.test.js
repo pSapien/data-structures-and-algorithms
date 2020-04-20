@@ -5,27 +5,30 @@ describe('Testing stack implementation', () => {
 
   test('push implementation', () => {
     stack.push('1');
+    expect(stack.size()).toBe(1);
+
     stack.push('2');
-    expect(stack.length).toBe(2);
+    expect(stack.size()).toBe(2);
+
     stack.push(['hello word']);
     stack.push({ a: 1, b: 1 });
-    expect(stack.length).toBe(4);
+    expect(stack.size()).toBe(4);
   });
 
   test('pop implementation', () => {
     expect(stack.pop()).toEqual({ a: 1, b: 1 });
-    expect(stack.length).toBe(3);
+    expect(stack.size()).toBe(3);
     stack.pop(); 
-    expect(stack.length).toBe(2);
+    expect(stack.size()).toBe(2);
     stack.pop(); 
-    expect(stack.length).toBe(1);
+    expect(stack.size()).toBe(1);
     stack.pop();
-    expect(stack.length).toBe(0);
+    expect(stack.size()).toBe(0);
     stack.pop();
     stack.pop();
     stack.pop();
     expect(stack.pop()).toBe(undefined);
-    expect(stack.length).toBe(0);
+    expect(stack.size()).toBe(0);
   });
 
   test('peek implementation', () => {
