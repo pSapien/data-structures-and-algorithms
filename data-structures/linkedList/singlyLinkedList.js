@@ -72,15 +72,28 @@ class SinglyLinkedList {
     return current.value;
   }
 
+  shift() {
+    if(!this._head) return undefined;
+    
+    const shifted = this._head;
+    this._head = shifted.next;
+ 
+    this._length--;
+    if(this._length === 0) this._tail = null;
+    return shifted.value;
+  }
+
   size() {
     return this._length;
   }
 
   get head() {
+    if(!this._head) return this._head;
     return this._head.value;
   }
 
   get tail() {
+    if(!this._tail) return this._tail;
     return this._tail.value;
   }
 }

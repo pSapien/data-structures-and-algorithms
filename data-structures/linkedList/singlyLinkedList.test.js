@@ -27,4 +27,22 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.size()).toBe(0);
     expect(SLL.pop()).toBe(undefined);
   });
+
+  test('testing shift implementation', () => {
+    SLL.push('Hello');
+    SLL.push('World');
+    SLL.push('Again');
+
+    expect(SLL.shift()).toBe('Hello');
+    expect(SLL.head).toBe('World');
+    expect(SLL.tail).toBe('Again');
+    expect(SLL.size()).toBe(2);
+    SLL.shift();
+    expect(SLL.size()).toBe(1);
+    expect(SLL.shift()).toBe('Again');
+
+    expect(SLL.size()).toBe(0);
+    expect(SLL.head).toBe(null);
+    expect(SLL.tail).toBe(null);
+  });
 });
