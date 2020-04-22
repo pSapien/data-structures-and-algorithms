@@ -15,14 +15,14 @@ class SinglyLinkedList {
   push(value) {
     const newNode = new Node(value);
 
-    if(!this._head) {
+    if(this._isEmpty()) {
       /** if the list is empty, then the head and tail should point to the same node */
 
       /** add the newNode to the head of the list */
       this._head = newNode;
 
-      /** point the tail to the head */
-      this._tail = this._head;
+      /** point the tail to the newNode */
+      this._tail = newNode;
     } else {
 
       /** attach the newNode to the end of the list */
@@ -36,7 +36,7 @@ class SinglyLinkedList {
   }
 
   pop() {
-    if (!this._head) return undefined;
+    if (this._isEmpty()) return undefined;
 
     this._length--;
 
@@ -73,14 +73,43 @@ class SinglyLinkedList {
   }
 
   shift() {
-    if(!this._head) return undefined;
-    
-    const shifted = this._head;
-    this._head = shifted.next;
+    if(this._isEmpty()) return undefined;
+
+    /** keeping track of the old head */
+    const oldHead = this._head;
+
+    /** assign the new head to next value of the old head */
+    this._head = oldHead.next;
  
     this._length--;
-    if(this._length === 0) this._tail = null;
-    return shifted.value;
+
+    /** if the list is empty, remove the value of the tail */
+    if(this._isEmpty()) this._tail = null;
+
+    return oldHead.value;
+  }
+
+  unshift(value) {
+    const newNode = new Node(value);
+
+    if (this._isEmpty()) {
+      /** if the list is empty, then both of the head and tail has the same node */
+      this._head = newNode;
+      this._tail = newNode;
+    } else {
+      /** attach old head to the newNode */
+      newNode.next = this._head;
+
+      /** replace old head with the newNode */
+      this._head = newNode;
+    }
+    
+    this._length++;
+    return this;
+  }
+
+  _isEmpty() {
+    return this.size() === 0;
   }
 
   size() {
@@ -88,12 +117,12 @@ class SinglyLinkedList {
   }
 
   get head() {
-    if(!this._head) return this._head;
+    if(this._isEmpty()) return this._head;
     return this._head.value;
   }
 
   get tail() {
-    if(!this._tail) return this._tail;
+    if(this._isEmpty()) return this._tail;
     return this._tail.value;
   }
 }

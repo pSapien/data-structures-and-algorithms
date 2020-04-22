@@ -5,12 +5,16 @@ describe('testing SinglyLinkedList', () => {
 
   test('testing push implementation', () => {
     SLL.push('I');
+  
+    expect(SLL.head).toBe('I');
+    expect(SLL.tail).toBe('I');
     expect(SLL.size()).toBe(1);
+
     SLL.push('am');
     expect(SLL.size()).toBe(2);
+
     SLL.push('okay');
     expect(SLL.size()).toBe(3);
-
     expect(SLL.head).toBe('I');
     expect(SLL.tail).toBe('okay');
   });
@@ -44,5 +48,17 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.size()).toBe(0);
     expect(SLL.head).toBe(null);
     expect(SLL.tail).toBe(null);
+  });
+
+  test('test unshift implementation', () => {
+    SLL.unshift('Hello');
+    expect(SLL.size()).toBe(1);
+    expect(SLL.head).toBe('Hello');
+    expect(SLL.tail).toBe('Hello');
+  
+    SLL.unshift('World');
+    expect(SLL.size()).toBe(2);
+    expect(SLL.head).toBe('World');
+    expect(SLL.tail).toBe('Hello');
   });
 });
