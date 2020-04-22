@@ -61,4 +61,40 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.head).toBe('World');
     expect(SLL.tail).toBe('Hello');
   });
+
+  test('test get implementation', () => {
+    expect(SLL.get(0).value).toBe('World');
+    expect(SLL.get(1).value).toBe('Hello');
+    expect(SLL.get(1000)).toBe(undefined);
+  });
+
+  test('test set implementation', () => {
+    SLL.pop();
+    SLL.pop();
+
+    expect(SLL.set(0, 'Hello')).toBe(false);
+    SLL.push('Hello');
+    expect(SLL.get(0).value).toBe('Hello');
+
+    SLL.push('World');
+    SLL.push('Again'); 
+
+    SLL.set(2, 'Nepal');
+    expect(SLL.get(2).value).toBe('Nepal');
+    expect(SLL.set(100, 'Lol')).toBe(false);
+  });
+
+  test('insert implementation', () => {
+    const SLL = new SinglyLinkedList();
+    SLL.push(10);
+    SLL.push(30);
+    SLL.push(40);
+    expect(SLL.insert(1, 20)).toBe(true);
+    expect(SLL.insert(4, 50)).toBe(true);
+    expect(SLL.get(0).value).toBe(10);
+    expect(SLL.get(1).value).toBe(20);
+    expect(SLL.get(2).value).toBe(30);
+    expect(SLL.get(3).value).toBe(40);
+    expect(SLL.get(4).value).toBe(50);
+  })
 });
