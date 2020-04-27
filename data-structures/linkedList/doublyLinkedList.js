@@ -42,6 +42,55 @@ class DoublyLinkedList {
     return this;
   }
 
+  /**
+   * remove the last value of the list
+   */
+  pop() {
+    if (this._isEmpty()) return undefined;
+    const oldTail = this._tail;
+
+    if (this.size() === 1) {
+      this._head = null;
+      this._tail = null;
+    } else {
+      /** keep the track the prev node of the oldTail */
+      const newTail = oldTail.prev;
+
+      /** deattach the last item from the list */
+      oldTail.prev = null;
+      newTail.next = null;
+
+      /** udpate the newTail */
+      this._tail = newTail;
+    }
+
+    this._length--;
+    return oldTail;
+  }
+
+  /**
+   * remove the first value of the list
+   */
+  shift() {
+    if (this._isEmpty()) return undefined;
+    if (this.size() == 1) return this.pop();
+
+    /** keep track of the value to be removed from the head */
+    const oldHead = this._head;
+
+    /** point the new head to the next value of the list */
+    this._head = this._head.next;
+
+    /** dettach the old head from the new head */
+    this._head.prev = null;
+
+    /** dettach the new head from the old head */
+    oldHead.next = null;
+
+    this._length--;
+    return oldHead;
+  }
+
   _isEmpty() {
     return this.size() === 0;
   }
