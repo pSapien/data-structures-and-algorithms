@@ -1,9 +1,9 @@
 const SinglyLinkedList = require('./singlyLinkedList');
 
-describe('testing SinglyLinkedList', () => {
+describe('SinglyLinkedList spec', () => {
   const SLL = new SinglyLinkedList();
 
-  test('testing push implementation', () => {
+  test('push implementation', () => {
     SLL.push('I');
   
     expect(SLL.head).toBe('I');
@@ -19,7 +19,7 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.tail).toBe('okay');
   });
 
-  test('testing pop implementation', () => {
+  test('pop implementation', () => {
     SLL.pop();
     expect(SLL.size()).toBe(2);
     expect(SLL.tail).toBe('am');
@@ -32,7 +32,7 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.pop()).toBe(undefined);
   });
 
-  test('testing shift implementation', () => {
+  test('shift implementation', () => {
     SLL.push('Hello');
     SLL.push('World');
     SLL.push('Again');
@@ -96,5 +96,29 @@ describe('testing SinglyLinkedList', () => {
     expect(SLL.get(2).value).toBe(30);
     expect(SLL.get(3).value).toBe(40);
     expect(SLL.get(4).value).toBe(50);
+    expect(SLL.size()).toBe(5);
+  });
+
+  test('remove implementation', () => {
+    const SLL = new SinglyLinkedList();
+    SLL.push(10);
+    SLL.push(30);
+    SLL.push(40);
+    expect(SLL.remove(1)).toBe(true);
+    expect(SLL.size()).toBe(2);
+    expect(SLL.get(1).value).toBe(40);
+  });
+
+  test.skip('reverse implementation', () => {
+    const SLL = new SinglyLinkedList();
+    SLL.push(10);
+    SLL.push(20);
+    SLL.push(30);
+    SLL.push(40);
+    SLL.reverse();
+    expect(SLL.get(0).value).toBe(40);
+    expect(SLL.get(1).value).toBe(30);
+    expect(SLL.get(2).value).toBe(20);
+    expect(SLL.get(3).value).toBe(10);
   })
 });

@@ -12,6 +12,9 @@ class SinglyLinkedList {
     this._length = 0;
   }
 
+  /**
+   * push value to the end of the List 
+   */
   push(value) {
     const newNode = new Node(value);
 
@@ -35,6 +38,9 @@ class SinglyLinkedList {
     return this;
   }
 
+  /**
+   * remove the last value of the List.
+   */
   pop() {
     if (this._isEmpty()) return undefined;
 
@@ -72,6 +78,9 @@ class SinglyLinkedList {
     return current.value;
   }
 
+  /**
+   * remove the first value of the list
+   */
   shift() {
     if (this._isEmpty()) return undefined;
 
@@ -89,6 +98,9 @@ class SinglyLinkedList {
     return oldHead.value;
   }
 
+  /**
+   * add the value from the start
+   */
   unshift(value) {
     const newNode = new Node(value);
 
@@ -108,6 +120,9 @@ class SinglyLinkedList {
     return this;
   }
 
+  /**
+   * get the value at the specified index
+   */
   get(index) {
     if (index < 0 || index > this._length) return undefined;
 
@@ -122,6 +137,9 @@ class SinglyLinkedList {
     }
   }
 
+  /**
+   * set the value at the specified index
+   */
   set(index, value) {
     const foundNode = this.get(index);
     if (foundNode) {
@@ -132,11 +150,15 @@ class SinglyLinkedList {
     return false;
   }
 
+  /**
+   * insert the value at the specified index
+   */
   insert(index, value) {
     if (index < 0 || index > this._length) return false;
     if (index === this._length) return Boolean(this.push(value));
-    if (index === 0) Boolean(this.unshift(value));
+    if (index === 0) return Boolean(this.unshift(value));
 
+    /** now, the index lies between the first and the last node */
     const newNode = new Node(value);
 
     /** keep track of previous and next node before insertion */
@@ -151,6 +173,32 @@ class SinglyLinkedList {
 
     this._length++;
     return true;
+  }
+
+  /**
+   * remove value at the specified index
+   */
+  remove(index) {
+    if (index < 0 || index >= this._length) return false;
+    if (index === 0) return Boolean(this.shift());
+    if (index === this._length - 1) return Boolean(this.pop());
+
+    /** now, the index lies between the first and the last node */
+
+    /** keep track of previous, current and next node before removal w.r.t index */
+    const previous = this.get(index - 1);
+    const removed = previous.next;
+    const next = removed.next;
+
+    /** just add the next node to the previous node */
+    previous.next = next;
+
+    this._length--;
+    return true;
+  }
+
+  reverse() {
+    // TODO: implement this.
   }
 
   _isEmpty() {
