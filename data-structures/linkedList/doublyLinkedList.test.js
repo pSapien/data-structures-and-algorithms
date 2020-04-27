@@ -65,11 +65,83 @@ describe('DoublyLinkedList spec', () => {
     DLL.push(2);
     DLL.push(3);
 
-
     expect(DLL.shift().value).toBe(1);
     expect(DLL.size()).toBe(2);
     expect(DLL.head.value).toBe(2);
     expect(DLL.head.prev).toBe(null);
     expect(DLL.head.next.value).toBe(3);
+  });
+
+  test('unshift implementation', () => {
+    const DLL = new DoublyLinkedList();
+
+    DLL.unshift(3);
+    DLL.unshift(2);
+    DLL.unshift(1);
+
+    expect(DLL.size()).toBe(3);
+    expect(DLL.tail.value).toBe(3);
+
+    expect(DLL.head.value).toBe(1);
+    expect(DLL.head.next.value).toBe(2);
+    expect(DLL.head.next.next.value).toBe(3);
+  });
+
+  test('get implementation', () => {
+    const DLL = new DoublyLinkedList();
+
+    DLL.push(1);
+    DLL.push(2);
+    DLL.push(3);
+    DLL.push(4);
+
+    expect(DLL.get(0).value).toBe(1);
+    expect(DLL.get(1).value).toBe(2);
+    expect(DLL.get(2).value).toBe(3);
+    expect(DLL.get(3).value).toBe(4);
+  });
+
+  test('set implementation', () => {
+    const DLL = new DoublyLinkedList();
+
+    DLL.push(1);
+    DLL.push(2);
+    DLL.push(3);
+    DLL.push(4);
+
+    expect(DLL.set(1, 22)).toBe(true);
+    expect(DLL.head.next.value).toBe(22);
+    expect(DLL.set(3, 44)).toBe(true);
+    expect(DLL.head.next.next.next.value).toBe(44);
+  });
+
+  test('insert implementation', () => {
+    const DLL = new DoublyLinkedList();
+
+    DLL.push(1);
+    DLL.push(2);
+    DLL.push(3);
+    DLL.push(4);
+
+    expect(DLL.insert(1, 1.5)).toBe(true);
+    expect(DLL.size()).toBe(5);
+    expect(DLL.head.next.prev.value).toBe(1);
+    expect(DLL.head.next.value).toBe(1.5);
+    expect(DLL.head.next.next.value).toBe(2);
+    expect(DLL.head.next.next.prev.value).toBe(1.5);
+  });
+
+  test('remove implementation', () => {
+    const DLL = new DoublyLinkedList();
+
+    DLL.push(1);
+    DLL.push(2);
+    DLL.push(3);
+    DLL.push(4);
+
+    expect(DLL.remove(1)).toBe(true);
+    expect(DLL.size()).toBe(3);
+    expect(DLL.head.next.value).toBe(3);
+    expect(DLL.head.next.prev.value).toBe(1);
   });
 })

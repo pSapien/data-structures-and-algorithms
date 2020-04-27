@@ -91,6 +91,125 @@ class DoublyLinkedList {
     return oldHead;
   }
 
+  /**
+   * pushes value from the start of the list
+   */
+  unshift(value) {
+    if (this._isEmpty()) return this.push(value);
+
+    const newNode = new Node(value);
+
+    /** attach the new node to the old head */
+    this._head.prev = newNode;
+    newNode.next = this._head;
+
+    /** update the head with the new node */
+    this._head = newNode;
+
+    this._length++;
+    return this;
+  }
+
+  /**
+   * get value specified at specified index
+   */
+  get(index) {
+    if (this._isEmpty() || index < 0 || index >= this._length) return undefined;
+
+    const mid = this._length / 2;
+
+    /** if the index lies to the left side from the mid */
+    if (index <= mid) {
+      let curr = this._head;
+
+      /** start the loop from first to the mid */
+      for (let i = 0; i <= mid; i++) {
+        if (i === index) return curr;
+        curr = curr.next;
+      }
+    } else {
+      /** if the index lies to the right side from the mid */
+      let curr = this._tail;
+
+      /** start the loop from the end to the next of the mid */
+      for (let i = this._length - 1; i > mid; i--) {
+        if (i === index) return curr;
+        curr = curr.prev;
+      }
+    }
+  }
+
+  /**
+   * set value at the specified index
+   */
+  set(index, value) {
+    const foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.value = value;
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * insert value at the specified index
+   */
+  insert(index, value) {
+    if (index < 0 || index >= this._length) return undefined;
+    if (index === 0) return Boolean(this.unshift(value));
+    if (index === this._length - 1) return Boolean(this.push(value));
+
+    const newNode = new Node(value);
+
+    /** represents the right part of the list from the specified index */
+    const rightNode = this.get(index);
+
+    /** represents the left part of the list from the specified index */
+    const leftNode = rightNode.prev;
+
+    /** attach right part of the list to the right side of the newNode */
+    newNode.next = rightNode;
+
+    /** attach the left part of the list to the left side of the newNode */
+    newNode.prev = rightNode.prev;
+
+    /** attach the newNode to left part of the right side of the rightNode */
+    rightNode.prev = newNode;
+
+    /** attach the newNode to right part of the leftNode */
+    leftNode.next = newNode;
+
+    this._length++;
+    return true;
+  }
+
+  /**
+   * remove value at the specified index
+   */
+  remove(index) {
+    if (index < 0 || index >= this._length) return undefined;
+    if (index === 0) return Boolean(this.shift());
+    if (index === this._length - 1) return Boolean(this.pop());
+
+    const foundNode = this.get(index);
+
+    /** represents the right part of the list from the specified index */
+    const rightNode = foundNode.next;
+
+    /** represents the left part of the list from the specified index */
+    const leftNode = foundNode.prev;
+
+    /** attach the right part of the list with the left */
+    leftNode.next = rightNode;
+
+    /** attach the left part of the list with the right */
+    rightNode.prev = leftNode;
+
+    this._length--;
+    return true;
+  }
+
   _isEmpty() {
     return this.size() === 0;
   }
