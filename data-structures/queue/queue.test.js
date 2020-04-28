@@ -1,9 +1,9 @@
 const Queue = require('./queue');
 
-describe('Testing queue implementation', () => {
+describe('Queue spec', () => {
   const queue = new Queue();
 
-  test('enqueue implementation', () => {
+  test('enqueue', () => {
     queue.enqueue(10);
     queue.enqueue(11);
 
@@ -13,7 +13,7 @@ describe('Testing queue implementation', () => {
     expect(queue.size()).toBe(3);
   });
 
-  test('dequeue implementation', () => {
+  test('dequeue', () => {
     queue.dequeue();
     expect(queue.size()).toBe(2);
 

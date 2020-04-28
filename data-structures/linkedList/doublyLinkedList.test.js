@@ -4,7 +4,7 @@ const DoublyLinkedList = require('./doublyLinkedList');
 
 describe('DoublyLinkedList spec', () => {
   
-  test('Push implementation', () => {
+  test('Push', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.push(1);
@@ -32,7 +32,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.tail.next).toBe(null);
   });
 
-  test('Pop implementation', () => {
+  test('Pop', () => {
     const DLL = new DoublyLinkedList();
 
     expect(DLL.pop()).toBe(undefined);
@@ -56,7 +56,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.tail.prev.value).toBe(1);
   });
 
-  test('shift implementation', () => {
+  test('shift', () => {
     const DLL = new DoublyLinkedList();
 
     expect(DLL.shift()).toBe(undefined);
@@ -72,7 +72,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.head.next.value).toBe(3);
   });
 
-  test('unshift implementation', () => {
+  test('unshift', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.unshift(3);
@@ -87,7 +87,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.head.next.next.value).toBe(3);
   });
 
-  test('get implementation', () => {
+  test('get', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.push(1);
@@ -101,7 +101,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.get(3).value).toBe(4);
   });
 
-  test('set implementation', () => {
+  test('set', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.push(1);
@@ -115,7 +115,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.head.next.next.next.value).toBe(44);
   });
 
-  test('insert implementation', () => {
+  test('insert', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.push(1);
@@ -131,7 +131,7 @@ describe('DoublyLinkedList spec', () => {
     expect(DLL.head.next.next.prev.value).toBe(1.5);
   });
 
-  test('remove implementation', () => {
+  test('remove', () => {
     const DLL = new DoublyLinkedList();
 
     DLL.push(1);

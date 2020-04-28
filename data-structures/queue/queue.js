@@ -1,27 +1,27 @@
 class Queue {
   constructor() {
-    this._memory = {};
-    this._head = 0;
-    this._tail = 0;
+    this.memory = {};
+    this.head = 0;
+    this.tail = 0;
   }
 
   enqueue(value) {
-    this._memory[this._tail++] = value;
+    this.memory[this.tail++] = value;
   }
 
   dequeue() {
-    const value = this._memory[this._head];
-    delete this._memory[this.head];
-    if (this._head < this._tail) this._head++;
+    const value = this.memory[this.head];
+    delete this.memory[this.head];
+    if (this.head < this.tail) this.head++;
     return value;
   }
 
   size() {
-    return this._tail - this._head;
+    return this.tail - this.head;
   }
 
   peek() {
-    return this._memory[this._head];
+    return this.memory[this.head];
   }
 }
 

@@ -9,9 +9,9 @@ class Node {
 
 class SinglyLinkedList {
   constructor() {
-    this._head = null;
-    this._tail = null;
-    this._length = 0;
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
   }
 
   /**
@@ -20,23 +20,23 @@ class SinglyLinkedList {
   push(value) {
     const newNode = new Node(value);
 
-    if (this._isEmpty()) {
+    if (this.isEmpty()) {
       /** if the list is empty, then the head and tail should point to the same node */
 
       /** add the newNode to the head of the list */
-      this._head = newNode;
+      this.head = newNode;
 
       /** point the tail to the newNode */
-      this._tail = this._head;
+      this.tail = this.head;
     } else {
 
       /** attach the newNode to the end of the list */
-      this._tail.next = newNode;
+      this.tail.next = newNode;
 
       /** update the tail to the newNode */
-      this._tail = newNode;
+      this.tail = newNode;
     }
-    this._length++;
+    this.length++;
     return this;
   }
 
@@ -44,19 +44,19 @@ class SinglyLinkedList {
    * remove the last value of the List.
    */
   pop() {
-    if (this._isEmpty()) return undefined;
+    if (this.isEmpty()) return undefined;
 
-    this._length--;
+    this.length--;
 
-    if (this._head === this._tail) {
-      const value = this._head;
-      this._head = this._tail = null
+    if (this.head === this.tail) {
+      const value = this.head;
+      this.head = this.tail = null
 
       return value
     }
 
     /** keep track of the current value to be popped off */
-    let current = this._head;
+    let current = this.head;
 
     /** keep track of second to last element */
     let newTail = null;
@@ -75,7 +75,7 @@ class SinglyLinkedList {
     newTail.next = null;
 
     /** newTail becomes the tail. HURRAY */
-    this._tail = newTail;
+    this.tail = newTail;
 
     return current.value;
   }
@@ -84,18 +84,18 @@ class SinglyLinkedList {
    * remove the first value of the list
    */
   shift() {
-    if (this._isEmpty()) return undefined;
+    if (this.isEmpty()) return undefined;
 
     /** keeping track of the old head */
-    const oldHead = this._head;
+    const oldHead = this.head;
 
     /** assign the new head to next value of the old head */
-    this._head = oldHead.next;
+    this.head = oldHead.next;
 
-    this._length--;
+    this.length--;
 
     /** if the list is empty, remove the value of the tail */
-    if (this._isEmpty()) this._tail = null;
+    if (this.isEmpty()) this.tail = null;
 
     return oldHead.value;
   }
@@ -106,19 +106,19 @@ class SinglyLinkedList {
   unshift(value) {
     const newNode = new Node(value);
 
-    if (this._isEmpty()) {
+    if (this.isEmpty()) {
       /** if the list is empty, then both of the head and tail has the same node */
-      this._head = newNode;
-      this._tail = this._head;
+      this.head = newNode;
+      this.tail = this.head;
     } else {
       /** attach old head to the newNode */
-      newNode.next = this._head;
+      newNode.next = this.head;
 
       /** replace old head with the newNode */
-      this._head = newNode;
+      this.head = newNode;
     }
 
-    this._length++;
+    this.length++;
     return this;
   }
 
@@ -126,12 +126,12 @@ class SinglyLinkedList {
    * get the value at the specified index
    */
   get(index) {
-    if (index < 0 || index > this._length) return undefined;
+    if (index < 0 || index > this.length) return undefined;
 
     /** keep track of the current node in the list */
-    let current = this._head;
+    let current = this.head;
 
-    for (let i = 0; i < this._length; i++) {
+    for (let i = 0; i < this.length; i++) {
       if (index === i) return current;
 
       /** set the new current to the next node of the current */
@@ -156,8 +156,8 @@ class SinglyLinkedList {
    * insert the value at the specified index
    */
   insert(index, value) {
-    if (index < 0 || index > this._length) return false;
-    if (index === this._length) return Boolean(this.push(value));
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) return Boolean(this.push(value));
     if (index === 0) return Boolean(this.unshift(value));
 
     /** now, the index lies between the first and the last node */
@@ -173,7 +173,7 @@ class SinglyLinkedList {
     /** attach the next node to the newNode. VOILA! */
     newNode.next = next;
 
-    this._length++;
+    this.length++;
     return true;
   }
 
@@ -181,9 +181,9 @@ class SinglyLinkedList {
    * remove value at the specified index
    */
   remove(index) {
-    if (index < 0 || index >= this._length) return false;
+    if (index < 0 || index >= this.length) return false;
     if (index === 0) return Boolean(this.shift());
-    if (index === this._length - 1) return Boolean(this.pop());
+    if (index === this.length - 1) return Boolean(this.pop());
 
     /** now, the index lies between the first and the last node */
 
@@ -195,19 +195,19 @@ class SinglyLinkedList {
     /** just add the next node to the previous node */
     previous.next = next;
 
-    this._length--;
+    this.length--;
     return true;
   }
 
 
   reverse() {
-    if (this._isEmpty()) return undefined;
-    if (this._length === 1) return this;
+    if (this.isEmpty()) return undefined;
+    if (this.length === 1) return this;
 
     /** swap the head and the tail **/
-    let curr = this._head;
-    this._head = this._tail;
-    this._tail = curr;
+    let curr = this.head;
+    this.head = this.tail;
+    this.tail = curr;
 
     let prev = null, next;
 
@@ -227,22 +227,12 @@ class SinglyLinkedList {
     return this;
   } 
   
-  _isEmpty() {
+  isEmpty() {
     return this.size() === 0;
   }
 
   size() {
-    return this._length;
-  }
-
-  get head() {
-    if (this._isEmpty()) return this._head;
-    return this._head.value;
-  }
-
-  get tail() {
-    if (this._isEmpty()) return this._tail;
-    return this._tail.value;
+    return this.length;
   }
 }
 

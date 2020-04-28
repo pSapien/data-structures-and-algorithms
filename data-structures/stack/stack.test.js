@@ -1,9 +1,9 @@
 const Stack = require('./stack');
 
-describe('Testing stack implementation', () => {  
+describe('Stack spec', () => {  
   const stack = new Stack();
 
-  test('push implementation', () => {
+  test('push', () => {
     stack.push('1');
     expect(stack.size()).toBe(1);
 
@@ -15,7 +15,7 @@ describe('Testing stack implementation', () => {
     expect(stack.size()).toBe(4);
   });
 
-  test('pop implementation', () => {
+  test('pop', () => {
     expect(stack.pop()).toEqual({ a: 1, b: 1 });
     expect(stack.size()).toBe(3);
     stack.pop(); 
@@ -31,7 +31,7 @@ describe('Testing stack implementation', () => {
     expect(stack.size()).toBe(0);
   });
 
-  test('peek implementation', () => {
+  test('peek', () => {
     expect(stack.peek()).toBe(undefined);
     stack.push(1);
     stack.push(2);
