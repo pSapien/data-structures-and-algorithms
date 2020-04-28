@@ -13,6 +13,9 @@ class BinarySearchTree {
     this.root = null;
   }
 
+  /**
+   * insert a node
+   */
   insert(value) {
     const newNode = new Node(value);
 
@@ -49,6 +52,30 @@ class BinarySearchTree {
       }
     }
   }
+
+  /**
+   * check whether the value is in the tree or not
+   */
+  contains(value) {
+    if(this.root === null) return undefined;
+
+    let curr = this.root;
+
+    while(true) {
+      if(value === curr.value) return true;
+
+      if(value > curr.value) {
+        /** look to the right side */
+        if(curr.right === null) return false;
+        curr = curr.right;
+      } else {
+        /** to the left, to the left */
+        if(curr.left === null) return false;
+        curr = curr.left;
+      }
+    } 
+  }
+ 
 }
 
 module.exports = BinarySearchTree;

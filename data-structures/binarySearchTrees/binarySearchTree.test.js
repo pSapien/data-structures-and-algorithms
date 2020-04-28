@@ -24,5 +24,15 @@ describe('BinarySearchTree spec', () => {
     expect(BST.root.right.value).toBe(13);
     expect(BST.root.right.right.value).toBe(16);
     expect(BST.root.right.left.value).toBe(11);
+  });
+
+  test('contains', () => {
+    const BST = new BinarySearchTree();
+    expect(BST.contains(2)).toBe(undefined);
+
+    nodes.forEach(n => BST.insert(n));
+    expect(BST.contains(2)).toBe(true);
+    expect(BST.contains(15)).toBe(false);
+    expect(BST.contains(100)).toBe(false);
   })
 })
