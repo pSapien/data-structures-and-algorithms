@@ -219,12 +219,10 @@ class DoublyLinkedList {
   }
 
   get head() {
-    if (this._isEmpty()) return this._head;
     return this._head;
   }
 
   get tail() {
-    if (this._isEmpty()) return this._tail;
     return this._tail;
   }
 }

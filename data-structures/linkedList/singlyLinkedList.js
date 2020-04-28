@@ -1,3 +1,5 @@
+// @ts-check
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -197,10 +199,34 @@ class SinglyLinkedList {
     return true;
   }
 
-  reverse() {
-    // TODO: implement this.
-  }
 
+  reverse() {
+    if (this._isEmpty()) return undefined;
+    if (this._length === 1) return this;
+
+    /** swap the head and the tail **/
+    let curr = this._head;
+    this._head = this._tail;
+    this._tail = curr;
+
+    let prev = null, next;
+
+    while(curr !== null) {
+      next = curr.next;
+      
+      /**
+       * dettach the head from the part of the list
+       * attach the prev part of the list to the curr.
+       */
+      curr.next = prev;
+      prev = curr;
+
+      curr = next;
+    }
+
+    return this;
+  } 
+  
   _isEmpty() {
     return this.size() === 0;
   }

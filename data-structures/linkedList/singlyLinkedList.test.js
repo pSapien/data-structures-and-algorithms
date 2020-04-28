@@ -109,16 +109,16 @@ describe('SinglyLinkedList spec', () => {
     expect(SLL.get(1).value).toBe(40);
   });
 
-  test.skip('reverse implementation', () => {
+  test('reverse implementation', () => {
     const SLL = new SinglyLinkedList();
     SLL.push(10);
     SLL.push(20);
     SLL.push(30);
-    SLL.push(40);
+
     SLL.reverse();
-    expect(SLL.get(0).value).toBe(40);
-    expect(SLL.get(1).value).toBe(30);
-    expect(SLL.get(2).value).toBe(20);
-    expect(SLL.get(3).value).toBe(10);
+
+    expect(SLL.get(0).value).toBe(30);
+    expect(SLL.get(1).value).toBe(20);
+    expect(SLL.get(2).value).toBe(10);
   })
 });
