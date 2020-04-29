@@ -7,12 +7,22 @@ const BinarySearchTree = require('./binarySearchTree');
  */
 
 const nodes = [10, 13, 5, 2, 7, 11, 16];
+const nodesBFS = [10, 5, 13, 2, 7, 11, 16]; 
+
+/**
+ *                10
+ *            8        20
+ *         3        15
+ *            6
+ */
+
+const anotherNodes = [10, 20, 8, 3, 15, 6];
+const anotherNodesBFS = [10, 8, 20, 3, 15, 6];
 
 describe('BinarySearchTree spec', () => {
   test('insert', () => {
     const BST = new BinarySearchTree();
     nodes.forEach(n => BST.insert(n));
-
     expect(BST.root.value).toBe(10);
 
     // checking left
@@ -34,5 +44,15 @@ describe('BinarySearchTree spec', () => {
     expect(BST.contains(2)).toBe(true);
     expect(BST.contains(15)).toBe(false);
     expect(BST.contains(100)).toBe(false);
-  })
+  });
+
+  test('bfs - Breadth First Search', () => {
+    const BST = new BinarySearchTree(); 
+    nodes.forEach(n => BST.insert(n));
+    expect(BST.BFS()).toEqual(nodesBFS);
+
+    const anotherBST = new BinarySearchTree();
+    anotherNodes.forEach(n => anotherBST.insert(n));
+    expect(anotherBST.BFS()).toEqual(anotherNodesBFS);
+  });
 })

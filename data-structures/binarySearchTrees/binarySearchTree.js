@@ -75,7 +75,36 @@ class BinarySearchTree {
       }
     } 
   }
- 
+  
+  /**
+   * Breadth-First Search
+   */
+  BFS() {
+    if(this.root === null) return undefined;
+    const queue = [];
+    const visited = [];
+
+    /** start from the root */
+    queue.push(this.root);
+
+    /** loop until there is nodes in the queue */
+    while(queue.length) {
+      /** let's, start from the start of the queue, shall we? */
+      let node = queue.shift();
+
+      /** okay, we have visited the node */
+      if(node.value !== null) visited.push(node.value);
+
+      /**
+       * now, we should start looking at the children of the node on next level
+       * and push it onto the queue
+       */
+      if(node.left !== null) queue.push(node.left);
+      if(node.right !== null) queue.push(node.right);
+    }
+
+    return visited;
+  }
 }
 
 module.exports = BinarySearchTree;
