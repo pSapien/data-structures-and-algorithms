@@ -46,41 +46,23 @@ class SinglyLinkedList {
   pop() {
     if (this.isEmpty()) return undefined;
 
-    this.length--;
-
-    if (this.head === this.tail) {
-      const value = this.head;
+    let removedNode = null;
+    
+    if (this.length === 1) {
+      removedNode = this.head;
       this.head = this.tail = null
-
-      return value
+    } else {
+      const secondToLastNode = this.get(this.length - 2);
+      removedNode = secondToLastNode.next;
+      secondToLastNode.next = null;
+      this.tail = secondToLastNode;
     }
-
-    /** keep track of the current value to be popped off */
-    let current = this.head;
-
-    /** keep track of second to last element */
-    let newTail = null;
-
-    /** 
-     * loop through the list to find the tail
-     * since the tail has no next value,
-     * it only loops till the second to last element.
-    */
-    while (current.next) {
-      newTail = current;
-      current = current.next;
-    }
-
-    /** since previous.next gives us the end of the list. remove it. SAD */
-    newTail.next = null;
-
-    /** newTail becomes the tail. HURRAY */
-    this.tail = newTail;
-
-    return current.value;
+    
+    this.length--;
+    return removedNode.value;
   }
 
-  /**
+  /**w
    * remove the first value of the list
    */
   shift() {

@@ -50,7 +50,7 @@ describe('SinglyLinkedList spec', () => {
     expect(SLL.tail).toBe(null);
   });
 
-  test('test unshift', () => {
+  test('unshift', () => {
     SLL.unshift('Hello');
     expect(SLL.size()).toBe(1);
     expect(SLL.head.value).toBe('Hello');
@@ -62,13 +62,13 @@ describe('SinglyLinkedList spec', () => {
     expect(SLL.tail.value).toBe('Hello');
   });
 
-  test('test get', () => {
+  test('get', () => {
     expect(SLL.get(0).value).toBe('World');
     expect(SLL.get(1).value).toBe('Hello');
     expect(SLL.get(1000)).toBe(undefined);
   });
 
-  test('test set', () => {
+  test('set', () => {
     SLL.pop();
     SLL.pop();
 
