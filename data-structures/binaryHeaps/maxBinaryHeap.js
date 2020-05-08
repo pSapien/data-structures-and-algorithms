@@ -22,7 +22,11 @@ class MaxBinaryHeap {
     let parentIdx = this.getParentIdx(childIdx);
     let parent = this.values[parentIdx];
 
-    while(parent && child > parent) {
+    /**
+     * bubble up from the child to the parent until the existence of parent.
+     * if child is greater than parent, swap child with parent.
+     */
+    while(parentIdx >= 0 && child > parent) {
       this.values[parentIdx] = child;
       this.values[childIdx] = parent;
 
