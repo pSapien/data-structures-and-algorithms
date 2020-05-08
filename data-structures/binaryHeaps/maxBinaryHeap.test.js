@@ -23,8 +23,10 @@ describe('MaxBinaryHeap Spec', () => {
 
   test('extractMax', () => {
     const Heap = createHeapWithDefinedValues();
+    Heap.insert(55);
+    expect(Heap.extractMax()).toBe(55);
+    expect(Heap.values).toEqual([41, 39, 33, 18, 27, 12]);
     expect(Heap.extractMax()).toBe(41);
-    console.log(Heap.values);
-    // expect(Heap.values).toEqual([39, 27, 33, 18, 12]);
+    expect(Heap.values).toEqual([39, 27, 33, 18, 12]);
   });
 })

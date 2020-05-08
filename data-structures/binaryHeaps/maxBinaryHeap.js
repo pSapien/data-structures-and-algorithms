@@ -9,23 +9,31 @@ class MaxBinaryHeap {
    * get the parent index of the any element
    */
   getParentIdx(child) {
-    return Math.floor((child - 1) / 2); 
+    return Math.floor((child - 1) / 2);
   }
 
-  /**
-   * get left child idx of a parent
-   */
+  getLeftChildIdx(parentIdx) {
+    return 2 * parentIdx + 1;
+  }
+
+  getRightChildIdx(parent) {
+    return this.getLeftChildIdx(parent) + 1;
+  }
+
+  hasRightChild(parent) {
+    return this.getRightChildIdx(parent) < this.values.length;
+  }
+
+  hasLeftChild(parent) {
+    return this.getLeftChildIdx(parent) < this.values.length;
+  }
+
   getLeftChild(parent) {
-    const idx = 2 * parent + 1;
-    return [idx, this.values[idx]];
+    return this.values[this.getLeftChildIdx(parent)];
   }
 
-  /**
-   * get right child idx of a parent
-   */
   getRightChild(parent) {
-    const idx = 2 * parent + 2;
-    return [idx, this.values[idx]];
+    return this.values[this.getRightChildIdx(parent)];
   }
 
   /** 
@@ -34,6 +42,7 @@ class MaxBinaryHeap {
   insert(child) {
     this.values.push(child);
 
+    // FIXME: use method to be more declarative
     let childIdx = this.values.length - 1;
     let parentIdx = this.getParentIdx(childIdx);
     let parent = this.values[parentIdx];
@@ -42,7 +51,7 @@ class MaxBinaryHeap {
      * bubble up from the child to the parent until the existence of parent.
      * if child is greater than parent, swap child with parent.
      */
-    while(parentIdx >= 0 && child > parent) {
+    while (parentIdx >= 0 && child > parent) {
       this.values[parentIdx] = child;
       this.values[childIdx] = parent;
 
@@ -58,38 +67,42 @@ class MaxBinaryHeap {
    * extract the max from the heap and reordering the properties in it.
    */
   extractMax() {
-    if(this.values.length === 0) return undefined;
+    if (this.values.length === 0) return undefined;
+    if (this.values.length === 1) return this.values.pop();
+    const rootIdx = 0;
 
     /** Replace the root of the heap with the last element on the last level. */
-    const max = this.values[0];
+    const max = this.values[rootIdx];
 
     /** the last element of the heap becomes the first */
-    this.values[0] = this.values[this.values.length - 1];
-    this.values.length--;
+    this.values[rootIdx] = this.values.pop();
 
-    /** start from the parent idx */
-    let parentIdx = 0;
-    let parent = this.values[parentIdx];
-    let [rightChildIdx, rightChildValue] = this.getRightChild(parentIdx);
-    let [leftChildIdx, leftChildValue] = this.getLeftChild(parentIdx);
+    let parentIdx = rootIdx;
+    let parent = this.values[rootIdx];
 
-    /**
-     * this process is typically called bubble-down
-     * where we check bubble-down to the heap
-    */
-    while(parent > leftChildValue || parent > rightChildValue) {
-      if(leftChildValue > parent) {
-        this.values[parentIdx] = leftChildValue;
-        this.values[leftChildIdx] = parent;
-        parentIdx = leftChildIdx;
-      } else if(rightChildValue > parent) {
-        this.values[parentIdx] = rightChildValue;
-        this.values[rightChildIdx] = parent;
-        parentIdx = rightChildIdx;
+    while (true) {
+      let nextChildIdx = null;
+
+      if (!this.hasLeftChild(parentIdx)) break;
+
+      let leftChild = this.getLeftChild(parentIdx);
+      if (leftChild > parent) nextChildIdx = this.getLeftChildIdx(parentIdx)
+
+      if (this.hasRightChild(parentIdx)) {
+        let rightChild = this.getRightChild(parentIdx);
+        if (
+          (nextChildIdx === null && rightChild > parent) ||
+          (nextChildIdx !== null && rightChild > leftChild)
+        ) {
+          nextChildIdx = this.getRightChildIdx(parentIdx);
+        }
       }
 
-      [rightChildIdx, rightChildValue] = this.getRightChild(parentIdx);
-      [leftChildIdx, leftChildValue] = this.getLeftChild(parentIdx);
+      if (nextChildIdx === null) break;
+
+      this.values[parentIdx] = this.values[nextChildIdx];
+      this.values[nextChildIdx] = parent;
+      parentIdx = nextChildIdx;
     }
 
     return max;
