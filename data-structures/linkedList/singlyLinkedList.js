@@ -52,9 +52,14 @@ class SinglyLinkedList {
       removedNode = this.head;
       this.head = this.tail = null
     } else {
+      /** we just need to find the secondToLastNode */
       const secondToLastNode = this.get(this.length - 2);
       removedNode = secondToLastNode.next;
+
+      /** dettach the last node */
       secondToLastNode.next = null;
+
+      /** update the tail */
       this.tail = secondToLastNode;
     }
     
