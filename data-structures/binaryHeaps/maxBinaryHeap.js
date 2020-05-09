@@ -58,9 +58,9 @@ class MaxBinaryHeap {
     this.heapifyUp();
     return this.values;
   }
-  
+
   /**
-   * HEAPIFY UP
+   * ------------------------- HEAPIFY UP ------------------------------------
    *  1. we start by adding element to the bottom left of the heap.
    *  2. compare the newly added element to the parent, if it is less. Stop.
    *  3. if greater, then swap the parent with its child. Go back to step 2.
@@ -72,8 +72,8 @@ class MaxBinaryHeap {
     while (this.hasParent(childIdx)) {
       const parentIdx = this.getParentIdx(childIdx);
       const parent = this.values[parentIdx];
-      
-      if(child > parent) {
+
+      if (child > parent) {
         this.swap(parentIdx, childIdx);
         childIdx = parentIdx;
       } else {
