@@ -12,6 +12,10 @@ class MaxBinaryHeap {
     return Math.floor((child - 1) / 2);
   }
 
+  hasParent(child) {
+    return this.getParentIdx(child) >= 0;
+  }
+
   getLeftChildIdx(parentIdx) {
     return 2 * parentIdx + 1;
   }
@@ -53,19 +57,21 @@ class MaxBinaryHeap {
     this.values.push(child);
 
     let childIdx = this.values.length - 1;
-    let parentIdx = this.getParentIdx(childIdx);
-    let parent = this.values[parentIdx];
-
+    
     /**
      * bubble up from the child to the parent until the existence of parent.
      * if child is greater than parent, swap child with parent.
      */
-    while (parentIdx >= 0 && child > parent) {
-      this.swap(parentIdx, childIdx);
+    while (this.hasParent(childIdx)) {
+      const parentIdx = this.getParentIdx(childIdx);
+      const parent = this.values[parentIdx];
 
-      childIdx = parentIdx;
-      parentIdx = this.getParentIdx(childIdx);
-      parent = this.values[parentIdx];
+      if(child > parent) {
+        this.swap(parentIdx, childIdx);
+        childIdx = parentIdx;
+      } else {
+        break;
+      }
     }
 
     return this.values;
