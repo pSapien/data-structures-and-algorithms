@@ -53,6 +53,28 @@ class HashTable {
     const keyValue = this.keyMap[idx].find(keyValue => this.getKey(keyValue) === key)
     return this.getValue(keyValue);
   }
+
+  collect(transform) {
+    if(this.keyMap.length === 0) undefined;
+    const collection = [];
+    this.keyMap.forEach(keyValues => {
+      if(keyValues.length > 1) {
+        keyValues.forEach(keyValue => collection.push(transform(keyValue)));
+      } else {
+        collection.push(transform(keyValues[0]));
+      }
+    });
+    
+    return collection;
+  }
+  
+  keys() {
+    return this.collect(this.getKey);
+  }
+
+  values() {
+    return this.collect(this.getValue);
+  }
 }
 
 module.exports = HashTable;
