@@ -115,10 +115,10 @@ class PriorityQueue {
   }
 
   /**
-   *     HEAPIFY-DOWN - moves the node at i down the max-heap until it no longer violates the priority queue propeties
+   *     HEAPIFY-DOWN
    * 1. we start from the root of the queue, i.e index : 0
-   * 2. we check their children. If in priority order then, stop.
-   * 3. if priority queue of their children is higher than parent. Swap. Go to step 2.
+   * 2. we check their children. If it is in order then, stop.
+   * 3. if priority of their children is higher than parent. Swap. Go to step 2.
   */
   heapifyDown() {
     let parentIdx = 0;
